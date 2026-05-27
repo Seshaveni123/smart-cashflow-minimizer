@@ -93,29 +93,37 @@ export default function App() {
   ]
 
   return (
-    <div className="min-h-screen" style={{ background: 'linear-gradient(135deg,#0a0e1a 0%,#0f1629 50%,#0a1628 100%)' }}>
+    <div
+      className="relative flex min-h-screen w-screen flex-col overflow-x-hidden text-[#2b124c]"
+      style={{
+        background:
+          'radial-gradient(circle at 12% 14%, rgba(124,58,237,0.18), transparent 22%), radial-gradient(circle at 86% 12%, rgba(6,182,212,0.18), transparent 20%), radial-gradient(circle at 72% 80%, rgba(236,72,153,0.16), transparent 24%), radial-gradient(circle at 18% 82%, rgba(250,204,21,0.12), transparent 26%), linear-gradient(135deg, #f7fbff 0%, #f4f7fb 40%, #fff7fb 100%)',
+      }}
+    >
       {/* Ambient blobs */}
       <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        <div className="absolute top-[-20%] left-[-10%] w-96 h-96 rounded-full opacity-20"
-          style={{ background: 'radial-gradient(circle,#3b82f6,transparent 70%)' }} />
-        <div className="absolute bottom-[-20%] right-[-10%] w-96 h-96 rounded-full opacity-15"
-          style={{ background: 'radial-gradient(circle,#8b5cf6,transparent 70%)' }} />
-        <div className="absolute top-[40%] left-[50%] w-64 h-64 rounded-full opacity-10"
-          style={{ background: 'radial-gradient(circle,#06b6d4,transparent 70%)', transform: 'translate(-50%,-50%)' }} />
+        <div className="absolute top-[-18%] left-[-10%] w-96 h-96 rounded-full opacity-35 float-soft"
+          style={{ background: 'radial-gradient(circle,rgba(124,58,237,0.45),transparent 68%)', filter: 'blur(4px)' }} />
+        <div className="absolute top-[10%] right-[-8%] w-[28rem] h-[28rem] rounded-full opacity-30 float-soft"
+          style={{ background: 'radial-gradient(circle,rgba(6,182,212,0.42),transparent 68%)', animationDelay: '2s', filter: 'blur(6px)' }} />
+        <div className="absolute bottom-[-18%] right-[10%] w-[26rem] h-[26rem] rounded-full opacity-26 float-soft"
+          style={{ background: 'radial-gradient(circle,rgba(236,72,153,0.34),transparent 68%)', animationDelay: '4s', filter: 'blur(10px)' }} />
+        <div className="absolute top-[42%] left-[48%] w-72 h-72 rounded-full opacity-18 pulse-glow"
+          style={{ background: 'radial-gradient(circle,rgba(250,204,21,0.28),transparent 68%)', transform: 'translate(-50%,-50%)' }} />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="relative z-10 mx-auto flex w-full max-w-[1600px] flex-1 min-h-0 flex-col px-4 py-4 sm:px-6 sm:py-6 lg:px-8 lg:py-8 xl:px-12">
         <Header onReset={reset} />
 
         {/* Tab nav + Demo button */}
-        <div className="flex items-center justify-between mb-8 flex-wrap gap-3">
-          <div className="flex gap-1 glass rounded-2xl p-1.5 flex-wrap">
+        <div className="mb-6 flex w-full flex-wrap items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-1.5 glass-strong rounded-2xl p-1.5 shadow-[0_18px_38px_rgba(43,18,76,0.12)]">
             {tabs.map(tab => (
               <button key={tab.id} onClick={() => setActiveTab(tab.id)}
                 className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-300 ${
                   activeTab === tab.id
-                    ? 'btn-primary text-white shadow-lg'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    ? 'btn-primary text-white shadow-[0_14px_30px_rgba(124,58,237,0.24)] scale-[1.02]'
+                    : 'text-[#5f6472] hover:text-[#22113f] hover:bg-white/86 border border-transparent hover:border-[#7c3aed]/20'
                 }`}>
                 {tab.label}
               </button>
@@ -127,7 +135,7 @@ export default function App() {
             whileHover={{ scale: 1.04 }} whileTap={{ scale: 0.97 }}
             onClick={loadDemo} disabled={loading}
             className="flex items-center gap-2 px-5 py-2.5 rounded-xl text-sm font-semibold text-white disabled:opacity-50"
-            style={{ background: 'linear-gradient(135deg,#f59e0b,#d97706)', boxShadow: '0 4px 15px rgba(245,158,11,0.3)' }}
+            style={{ background: 'linear-gradient(135deg,#7c3aed,#ec4899 50%, #06b6d4)', boxShadow: '0 14px 32px rgba(124,58,237,0.24), 0 0 28px rgba(6,182,212,0.20)' }}
           >
             🎯 Load Demo Data
           </motion.button>
@@ -137,21 +145,23 @@ export default function App() {
         <AnimatePresence>
           {error && (
             <motion.div initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0 }}
-              className="mb-6 px-4 py-3 rounded-xl text-sm text-red-300 glass"
-              style={{ border: '1px solid rgba(239,68,68,0.3)' }}>
+              className="mb-6 px-4 py-3 rounded-xl text-sm glass"
+              style={{ border: '1px solid rgba(124,58,237,0.18)', color: '#7c3aed', background: 'rgba(255,255,255,0.92)' }}>
               ⚠️ {error}
             </motion.div>
           )}
         </AnimatePresence>
 
+        <div className="flex w-full flex-1 min-h-0 flex-col">
         <AnimatePresence mode="wait">
           {/* DASHBOARD */}
           {activeTab === 'dashboard' && (
             <motion.div key="dashboard"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}
+              className="flex w-full flex-1 min-h-0 flex-col">
               <AnalyticsCards participants={participants} expenses={expenses} results={results} />
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-6">
+              <div className="mt-6 grid flex-1 grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
                 <ParticipantsPanel participants={participants} onAdd={addParticipant} onRemove={removeParticipant} expenses={expenses} />
                 <ExpenseForm participants={participants} onAdd={addExpense} />
               </div>
@@ -159,10 +169,10 @@ export default function App() {
                 <motion.button
                   whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}
                   onClick={() => calculate()} disabled={loading}
-                  className="btn-primary text-white font-semibold px-12 py-4 rounded-2xl text-lg flex items-center gap-3 disabled:opacity-50"
+                  className="btn-primary text-white font-semibold px-12 py-4 rounded-2xl text-lg flex items-center gap-3 disabled:opacity-50 shadow-[0_18px_36px_rgba(124,58,237,0.24)]"
                 >
                   {loading
-                    ? <><div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" /> Calculating...</>
+                    ? <><div className="w-5 h-5 border-2 border-white/40 border-t-white rounded-full animate-spin" /> Calculating...</>
                     : <>⚡ Minimize Transactions</>}
                 </motion.button>
               </motion.div>
@@ -173,8 +183,9 @@ export default function App() {
           {activeTab === 'expenses' && (
             <motion.div key="expenses"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}
+              className="flex w-full flex-1 min-h-0 flex-col">
+              <div className="grid flex-1 grid-cols-1 items-stretch gap-6 lg:grid-cols-2">
                 <ExpenseForm participants={participants} onAdd={addExpense} />
                 <ExpenseList expenses={expenses} onRemove={removeExpense} />
               </div>
@@ -190,7 +201,8 @@ export default function App() {
           {activeTab === 'results' && (
             <motion.div key="results"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}
+              className="flex w-full flex-1 min-h-0 flex-col">
               <div className="space-y-6">
                 {results?.analytics && (
                   <OptimizationComparison analytics={results.analytics} participants={participants} />
@@ -210,7 +222,8 @@ export default function App() {
           {activeTab === 'graph' && (
             <motion.div key="graph"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}
+              className="flex w-full flex-1 min-h-0 flex-col">
               <GraphView results={results} participants={participants} expenses={expenses} />
             </motion.div>
           )}
@@ -219,7 +232,8 @@ export default function App() {
           {activeTab === 'insights' && (
             <motion.div key="insights"
               initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}>
+              exit={{ opacity: 0, y: -20 }} transition={{ duration: 0.3 }}
+              className="flex w-full flex-1 flex-col">
               <div className="space-y-6">
                 <AlgorithmExplainer />
                 <DSAInfoPanel />
@@ -227,7 +241,8 @@ export default function App() {
             </motion.div>
           )}
         </AnimatePresence>
-      </div>
+        </div>
+      </main>
     </div>
   )
 }

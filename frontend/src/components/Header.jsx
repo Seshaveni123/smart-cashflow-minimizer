@@ -9,15 +9,15 @@ export default function Header({ onReset }) {
     >
       <div className="flex items-center gap-4">
         {/* Logo */}
-        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl"
-          style={{ background: 'linear-gradient(135deg, #3b82f6, #8b5cf6)' }}>
+        <div className="w-12 h-12 rounded-2xl flex items-center justify-center text-2xl pulse-glow"
+          style={{ background: 'linear-gradient(135deg, #f7cbca, #d5e5e5 55%, #c9d7d8)', boxShadow: '0 12px 24px rgba(133,79,108,0.18)' }}>
           💰
         </div>
         <div>
-          <h1 className="text-2xl font-bold gradient-text leading-tight">
+          <h1 className="text-3xl sm:text-4xl font-bold gradient-text leading-tight">
             Smart Cash Flow Minimizer
           </h1>
-          <p className="text-gray-500 text-sm mt-0.5">
+          <p className="text-[#5d6b6b] text-sm sm:text-base mt-1 font-medium">
             Greedy Algorithm • Heap Optimization • Graph Visualization
           </p>
         </div>
@@ -27,7 +27,7 @@ export default function Header({ onReset }) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
         onClick={onReset}
-        className="btn-danger text-white text-sm font-medium px-5 py-2.5 rounded-xl flex items-center gap-2"
+        className="btn-danger text-[#f1f7f7] text-sm font-medium px-5 py-2.5 rounded-xl flex items-center gap-2"
       >
         🔄 Reset All
       </motion.button>

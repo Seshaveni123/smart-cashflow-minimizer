@@ -1,14 +1,14 @@
 import { PieChart, Pie, Cell, Tooltip, ResponsiveContainer, Legend } from 'recharts'
 import { motion } from 'framer-motion'
 
-const COLORS = ['#3b82f6', '#8b5cf6', '#06b6d4', '#10b981', '#f59e0b', '#ef4444', '#ec4899']
+const COLORS = ['#f7cbca', '#dfb6b2', '#c9d7d8', '#d5e5e5', '#f1f7f7', '#854f6c', '#5d6b6b']
 
 const CustomTooltip = ({ active, payload }) => {
   if (!active || !payload?.length) return null
   return (
     <div className="glass px-3 py-2 rounded-xl text-sm">
-      <div className="text-white font-semibold">{payload[0].name}</div>
-      <div className="text-blue-400">₹{payload[0].value.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
+      <div className="text-[#2b124c] font-semibold">{payload[0].name}</div>
+      <div className="text-[#5d6b6b]">₹{payload[0].value.toLocaleString('en-IN', { minimumFractionDigits: 2 })}</div>
     </div>
   )
 }
@@ -22,11 +22,11 @@ export default function PieChartPanel({ categoryTotals }) {
     <motion.div
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-2xl p-6"
+      className="glass rounded-2xl p-6 h-full"
     >
       <div className="flex items-center gap-2 mb-5">
         <span>🥧</span>
-        <h2 className="text-white font-semibold text-lg">Expense by Category</h2>
+        <h2 className="text-[#2b124c] font-semibold text-lg">Expense by Category</h2>
       </div>
       <ResponsiveContainer width="100%" height={280}>
         <PieChart>
@@ -49,7 +49,7 @@ export default function PieChartPanel({ categoryTotals }) {
           </Pie>
           <Tooltip content={<CustomTooltip />} />
           <Legend
-            formatter={(value) => <span style={{ color: '#9ca3af', fontSize: 12 }}>{value}</span>}
+            formatter={(value) => <span style={{ color: '#5d6b6b', fontSize: 12 }}>{value}</span>}
           />
         </PieChart>
       </ResponsiveContainer>

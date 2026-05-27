@@ -27,15 +27,15 @@ export default function ExpenseForm({ participants, onAdd }) {
   const err = (f) => touched && !form[f]
 
   return (
-    <div className="glass rounded-2xl p-6">
+    <div className="glass rounded-2xl p-6 h-full flex flex-col">
       <div className="flex items-center gap-2 mb-5">
         <span className="text-lg">💳</span>
-        <h2 className="text-white font-semibold text-lg">Add Expense</h2>
+        <h2 className="text-[#2b124c] font-semibold text-xl">Add Expense</h2>
       </div>
 
-      <form onSubmit={handleSubmit} className="space-y-4">
+      <form onSubmit={handleSubmit} className="flex flex-1 flex-col space-y-4">
         <div>
-          <label className="text-gray-400 text-xs mb-1.5 block">Description</label>
+          <label className="text-[#5d6b6b] text-xs mb-1.5 block font-semibold tracking-wide uppercase">Description</label>
           <input
             className={`input-field ${err('description') ? 'border-red-500/60' : ''}`}
             placeholder="e.g. Dinner at restaurant"
@@ -46,7 +46,7 @@ export default function ExpenseForm({ participants, onAdd }) {
 
         <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="text-gray-400 text-xs mb-1.5 block">Amount (₹)</label>
+            <label className="text-[#5d6b6b] text-xs mb-1.5 block font-semibold tracking-wide uppercase">Amount (₹)</label>
             <input
               type="number"
               min="0"
@@ -58,7 +58,7 @@ export default function ExpenseForm({ participants, onAdd }) {
             />
           </div>
           <div>
-            <label className="text-gray-400 text-xs mb-1.5 block">Category</label>
+            <label className="text-[#5d6b6b] text-xs mb-1.5 block font-semibold tracking-wide uppercase">Category</label>
             <select
               className="select-field"
               value={form.category}
@@ -70,9 +70,9 @@ export default function ExpenseForm({ participants, onAdd }) {
         </div>
 
         <div>
-          <label className="text-gray-400 text-xs mb-1.5 block">Paid By</label>
+          <label className="text-[#5d6b6b] text-xs mb-1.5 block font-semibold tracking-wide uppercase">Paid By</label>
           {participants.length === 0 ? (
-            <div className="input-field text-gray-600 cursor-not-allowed">Add participants first</div>
+          <div className="input-field text-[#728085] cursor-not-allowed">Add participants first</div>
           ) : (
             <select
               className={`select-field ${err('payer') ? 'border-red-500/60' : ''}`}
@@ -88,7 +88,7 @@ export default function ExpenseForm({ participants, onAdd }) {
         <motion.button
           whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
           type="submit"
-          className="btn-primary text-white w-full py-3 rounded-xl font-semibold text-sm"
+          className="btn-primary mt-auto text-[#2b124c] w-full py-3 rounded-xl font-semibold text-base"
         >
           + Add Expense
         </motion.button>

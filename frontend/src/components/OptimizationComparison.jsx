@@ -26,7 +26,7 @@ function useCountUp(target, duration = 1200, active = true) {
 }
 
 /* Circular progress SVG */
-function CircularProgress({ pct, size = 120, stroke = 10, color = '#3b82f6' }) {
+function CircularProgress({ pct, size = 120, stroke = 10, color = '#854f6c' }) {
   const r = (size - stroke) / 2
   const circ = 2 * Math.PI * r
   const dash = (pct / 100) * circ
@@ -36,7 +36,7 @@ function CircularProgress({ pct, size = 120, stroke = 10, color = '#3b82f6' }) {
       <svg width={size} height={size} className="rotate-[-90deg]">
         {/* Track */}
         <circle cx={size/2} cy={size/2} r={r}
-          fill="none" stroke="rgba(255,255,255,0.06)" strokeWidth={stroke} />
+          fill="none" stroke="rgba(93,107,107,0.12)" strokeWidth={stroke} />
         {/* Fill */}
         <motion.circle
           cx={size/2} cy={size/2} r={r}
@@ -52,8 +52,8 @@ function CircularProgress({ pct, size = 120, stroke = 10, color = '#3b82f6' }) {
         />
       </svg>
       <div className="absolute text-center">
-        <div className="text-2xl font-bold text-white">{Math.round(pct)}%</div>
-        <div className="text-gray-500 text-xs">efficiency</div>
+        <div className="text-2xl font-bold text-[#2b124c]">{Math.round(pct)}%</div>
+        <div className="text-[#5d6b6b] text-xs font-semibold">efficiency</div>
       </div>
     </div>
   )
@@ -81,7 +81,7 @@ export default function OptimizationComparison({ analytics, participants }) {
       sub: 'Worst-case transactions',
       value: beforeVal,
       suffix: '',
-      color: '#ef4444',
+      color: '#854f6c',
       icon: '❌',
       bar: 1,
     },
@@ -90,7 +90,7 @@ export default function OptimizationComparison({ analytics, participants }) {
       sub: 'Greedy algorithm result',
       value: afterVal,
       suffix: '',
-      color: '#10b981',
+      color: '#dfb6b2',
       icon: '✅',
       bar: before > 0 ? after / before : 0,
     },
@@ -99,7 +99,7 @@ export default function OptimizationComparison({ analytics, participants }) {
       sub: 'Unnecessary transactions removed',
       value: reducedVal,
       suffix: ` (${pct}%)`,
-      color: '#3b82f6',
+      color: '#fbe4d8',
       icon: '📉',
       bar: before > 0 ? reduced / before : 0,
     },
@@ -111,12 +111,12 @@ export default function OptimizationComparison({ analytics, participants }) {
       initial={{ opacity: 0, y: 24 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className="glass rounded-2xl p-6"
+      className="glass rounded-2xl p-6 h-full"
     >
       <div className="flex items-center gap-2 mb-6">
         <span>📊</span>
-        <h2 className="text-white font-semibold text-lg">Before vs After Optimization</h2>
-        <span className="ml-auto text-xs text-gray-500 glass px-2 py-0.5 rounded-full">
+        <h2 className="text-[#2b124c] font-semibold text-lg">Before vs After Optimization</h2>
+        <span className="ml-auto text-xs text-[#5d6b6b] glass px-2 py-0.5 rounded-full font-medium">
           Greedy Algorithm Result
         </span>
       </div>
@@ -137,8 +137,8 @@ export default function OptimizationComparison({ analytics, participants }) {
                 <div className="flex items-center gap-2">
                   <span className="text-lg">{s.icon}</span>
                   <div>
-                    <div className="text-white text-sm font-semibold">{s.label}</div>
-                    <div className="text-gray-500 text-xs">{s.sub}</div>
+                    <div className="text-[#2b124c] text-sm font-semibold">{s.label}</div>
+                    <div className="text-[#5d6b6b] text-xs font-medium">{s.sub}</div>
                   </div>
                 </div>
                 <div className="text-right">
@@ -150,11 +150,11 @@ export default function OptimizationComparison({ analytics, participants }) {
                       {s.suffix}
                     </span>
                   )}
-                  <div className="text-gray-500 text-xs">transactions</div>
+                  <div className="text-[#5d6b6b] text-xs font-medium">transactions</div>
                 </div>
               </div>
               {/* Bar */}
-              <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(255,255,255,0.05)' }}>
+              <div className="h-2 rounded-full overflow-hidden" style={{ background: 'rgba(213,229,229,0.55)' }}>
                 <motion.div
                   className="h-full rounded-full"
                   style={{ background: s.color, boxShadow: `0 0 8px ${s.color}88` }}
@@ -169,8 +169,8 @@ export default function OptimizationComparison({ analytics, participants }) {
 
         {/* Circular efficiency ring */}
         <div className="flex flex-col items-center justify-center p-6 rounded-2xl"
-          style={{ background: 'rgba(59,130,246,0.05)', border: '1px solid rgba(59,130,246,0.15)' }}>
-          <div className="text-xs text-gray-500 uppercase tracking-wider mb-4">
+          style={{ background: 'rgba(241,247,247,0.78)', border: '1px solid rgba(201,215,216,0.46)', boxShadow: '0 18px 34px rgba(93,107,107,0.08)' }}>
+          <div className="text-xs text-[#5d6b6b] uppercase tracking-wider mb-4 font-semibold">
             Optimization Efficiency
           </div>
           {inView && (
@@ -178,14 +178,14 @@ export default function OptimizationComparison({ analytics, participants }) {
               pct={pct}
               size={130}
               stroke={11}
-              color={pct >= 60 ? '#10b981' : pct >= 30 ? '#f59e0b' : '#ef4444'}
+              color={pct >= 60 ? '#fbe4d8' : pct >= 30 ? '#dfb6b2' : '#854f6c'}
             />
           )}
           <div className="mt-4 text-center">
-            <div className="text-white font-semibold text-sm">
+            <div className="text-[#2b124c] font-semibold text-sm">
               {reduced} transaction{reduced !== 1 ? 's' : ''} saved
             </div>
-            <div className="text-gray-500 text-xs mt-1">
+            <div className="text-[#5d6b6b] text-xs mt-1 font-medium">
               out of {before} possible
             </div>
           </div>

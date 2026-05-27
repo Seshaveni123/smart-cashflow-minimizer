@@ -13,7 +13,7 @@ const STEPS = [
     title: 'Calculate Net Balances',
     desc: 'For each person: balance = total_paid − equal_share. Positive = creditor, Negative = debtor.',
     code: 'balance[i] = paid[i] − (total / n)',
-    color: '#3b82f6',
+    color: '#dfb6b2',
   },
   {
     num: 2,
@@ -21,7 +21,7 @@ const STEPS = [
     title: 'Find Maximum Creditor',
     desc: 'Use a max-heap to extract the person owed the most money (highest positive balance).',
     code: 'creditor = heapq.heappop(max_heap)',
-    color: '#10b981',
+    color: '#fbe4d8',
   },
   {
     num: 3,
@@ -29,7 +29,7 @@ const STEPS = [
     title: 'Find Maximum Debtor',
     desc: 'Simultaneously extract the person who owes the most money (largest negative balance).',
     code: 'debtor = heapq.heappop(min_heap)',
-    color: '#ef4444',
+    color: '#854f6c',
   },
   {
     num: 4,
@@ -37,7 +37,7 @@ const STEPS = [
     title: 'Settle Minimum Amount',
     desc: 'Transfer min(|creditor_balance|, |debtor_balance|). Push any remainder back into the heap.',
     code: 'settled = min(credit, debt)\npush remainder back',
-    color: '#f59e0b',
+    color: '#dfb6b2',
   },
   {
     num: 5,
@@ -45,7 +45,7 @@ const STEPS = [
     title: 'Repeat Until Zero',
     desc: 'Loop until all balances reach zero. Each iteration produces exactly one optimized transaction.',
     code: 'while creditors and debtors:\n  settle()',
-    color: '#8b5cf6',
+    color: '#522b5b',
   },
 ]
 
@@ -56,28 +56,28 @@ const DSA_ITEMS = [
     title: 'Greedy Algorithm',
     detail: 'Always pick the maximum creditor and debtor at each step for a locally optimal — globally optimal — solution.',
     badge: 'O(n²)',
-    color: '#3b82f6',
+    color: '#dfb6b2',
   },
   {
     icon: '⛰️',
     title: 'Max Heap / Priority Queue',
     detail: 'Python heapq with negated values acts as a max-heap, enabling O(log n) extraction of extremes.',
     badge: 'O(log n)',
-    color: '#8b5cf6',
+    color: '#854f6c',
   },
   {
     icon: '🕸️',
     title: 'Graph Data Structure',
     detail: 'Participants are nodes; each settlement is a directed weighted edge. Visualized with React Flow.',
     badge: 'O(n + e)',
-    color: '#06b6d4',
+    color: '#fbe4d8',
   },
   {
     icon: '🏁',
     title: 'Time Complexity',
     detail: 'n participants, each processed at most once per heap operation. Total: O(n log n) for full settlement.',
     badge: 'O(n log n)',
-    color: '#10b981',
+    color: '#dfb6b2',
   },
 ]
 
@@ -89,27 +89,27 @@ export function AlgorithmExplainer() {
     <motion.div
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
-      className="glass rounded-2xl overflow-hidden"
+      className="glass rounded-2xl overflow-hidden h-full"
     >
       {/* Toggle header */}
       <button
-        className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/[0.02] transition-colors"
+        className="w-full flex items-center justify-between px-6 py-5 text-left hover:bg-white/60 transition-colors"
         onClick={() => setOpen(o => !o)}
       >
         <div className="flex items-center gap-3">
           <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg"
-            style={{ background: 'rgba(59,130,246,0.15)', border: '1px solid rgba(59,130,246,0.3)' }}>
+            style={{ background: 'rgba(247,203,202,0.50)', border: '1px solid rgba(201,215,216,0.60)' }}>
             🧠
           </div>
           <div>
-            <div className="text-white font-semibold">How Optimization Works</div>
-            <div className="text-gray-500 text-xs">Step-by-step greedy algorithm walkthrough</div>
+            <div className="text-[#2b124c] font-semibold text-lg">How Optimization Works</div>
+            <div className="text-[#5d6b6b] text-sm font-medium">Step-by-step greedy algorithm walkthrough</div>
           </div>
         </div>
         <motion.div
           animate={{ rotate: open ? 180 : 0 }}
           transition={{ duration: 0.25 }}
-          className="text-gray-400 text-xl"
+          className="text-[#854f6c] text-xl"
         >
           ⌄
         </motion.div>
@@ -127,7 +127,7 @@ export function AlgorithmExplainer() {
             <div className="px-6 pb-6">
               {/* Connector line */}
               <div className="relative">
-                <div className="absolute left-[22px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500/30 via-purple-500/20 to-transparent" />
+        <div className="absolute left-[22px] top-0 bottom-0 w-0.5 bg-gradient-to-b from-[#d5e5e5]/60 via-[#854f6c]/35 to-transparent" />
 
                 <div className="space-y-3">
                   {STEPS.map((step, i) => (
@@ -154,10 +154,10 @@ export function AlgorithmExplainer() {
                       {/* Content */}
                       <div className="flex-1 pb-3">
                         <div className="flex items-center gap-2 mb-1">
-                          <span className="text-white font-semibold text-sm">{step.title}</span>
-                          <span className="text-xs text-gray-600">Step {step.num}</span>
+                          <span className="text-[#2b124c] font-semibold text-base">{step.title}</span>
+                          <span className="text-xs text-[#854f6c] font-semibold">Step {step.num}</span>
                         </div>
-                        <p className="text-gray-400 text-xs leading-relaxed">{step.desc}</p>
+                        <p className="text-[#5d6b6b] text-sm leading-relaxed font-medium">{step.desc}</p>
 
                         <AnimatePresence>
                           {activeStep === i && (
@@ -170,9 +170,9 @@ export function AlgorithmExplainer() {
                               <pre
                                 className="mt-2 px-3 py-2 rounded-lg text-xs font-mono leading-relaxed"
                                 style={{
-                                  background: `${step.color}0d`,
-                                  border: `1px solid ${step.color}22`,
-                                  color: step.color,
+                                  background: `rgba(255,255,255,0.78)`,
+                                  border: `1px solid ${step.color}33`,
+                                  color: '#2b124c',
                                   whiteSpace: 'pre-wrap',
                                 }}
                               >
@@ -201,16 +201,16 @@ export function DSAInfoPanel() {
       initial={{ opacity: 0, y: 16 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.1 }}
-      className="glass rounded-2xl p-6"
+      className="glass rounded-2xl p-6 h-full"
     >
       <div className="flex items-center gap-2 mb-5">
         <div className="w-9 h-9 rounded-xl flex items-center justify-center text-lg"
-          style={{ background: 'rgba(139,92,246,0.15)', border: '1px solid rgba(139,92,246,0.3)' }}>
+          style={{ background: 'rgba(213,229,229,0.45)', border: '1px solid rgba(133,79,108,0.20)' }}>
           ⚡
         </div>
         <div>
-          <h2 className="text-white font-semibold">Algorithm Details</h2>
-          <p className="text-gray-500 text-xs">Data structures & complexity</p>
+          <h2 className="text-[#2b124c] font-semibold text-xl">Algorithm Details</h2>
+          <p className="text-[#5d6b6b] text-sm font-medium">Data structures & complexity</p>
         </div>
       </div>
 
@@ -231,7 +231,7 @@ export function DSAInfoPanel() {
             <div className="flex items-start justify-between gap-2 mb-2">
               <div className="flex items-center gap-2">
                 <span className="text-xl">{item.icon}</span>
-                <span className="text-white font-semibold text-sm">{item.title}</span>
+                <span className="text-[#2b124c] font-semibold text-base">{item.title}</span>
               </div>
               <span
                 className="text-xs font-bold px-2 py-0.5 rounded-full flex-shrink-0 font-mono"
@@ -245,7 +245,7 @@ export function DSAInfoPanel() {
                 {item.badge}
               </span>
             </div>
-            <p className="text-gray-500 text-xs leading-relaxed">{item.detail}</p>
+            <p className="text-[#5d6b6b] text-sm leading-relaxed font-medium">{item.detail}</p>
           </motion.div>
         ))}
       </div>
